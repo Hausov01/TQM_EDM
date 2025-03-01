@@ -15,7 +15,7 @@ using System.Windows.Media;
 
 namespace Test_WPF
 {
-    internal class Tab
+    internal class Tab //тест гита
     {
         AppContext db;
         public Tab(TabControl TabsContainer, Documents document, object selectedItem) // конструктор документа
