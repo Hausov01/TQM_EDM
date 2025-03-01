@@ -15,7 +15,7 @@ using System.Windows.Media;
 
 namespace Test_WPF
 {
-    internal class Tab //тест гита
+    internal class Tab
     {
         AppContext db;
         public Tab(TabControl TabsContainer, Documents document, object selectedItem) // конструктор документа
@@ -89,26 +89,10 @@ namespace Test_WPF
         public Tab(TabControl TabsContainer, Documents document)// конструктор с списком
         {
             db = new AppContext();
-            //ListBox notesList = new ListBox();
-
-            StackPanel St = new StackPanel();
-            var CreateNewButton = new Button
-            {
-                Content = "Создать",
-                Width = 60,
-                Height = 15,
-                Margin = new Thickness(3, 0, 0, 0),
-                Background = Brushes.Transparent,
-                BorderBrush = Brushes.Transparent,
-                Padding = new Thickness(0),
-                Cursor = Cursors.Hand
-            };
+            ListBox notesList = new ListBox();
 
             DockPanel roster = new DockPanel();
-            roster.Children.Add(RosterPaste(document, TabsContainer));
-            St.Children.Add(CreateNewButton);
-            St.Children.Add(roster);
-            
+            roster = RosterPaste(document, TabsContainer);
 
             // Создаем кастомный заголовок вкладки
             var headerPanel = new StackPanel { Orientation = Orientation.Horizontal };
@@ -128,7 +112,6 @@ namespace Test_WPF
                 Padding = new Thickness(0),
                 Cursor = Cursors.Hand
             };
-            
 
             // Добавляем элементы в заголовок
             headerPanel.Children.Add(tabText);
@@ -145,11 +128,6 @@ namespace Test_WPF
             closeButton.Click += (sender, e) =>
             {
                 TabsContainer.Items.Remove(tabItem); // Удаляем вкладку при нажатии на кнопку
-            };
-
-            CreateNewButton.Click += (sender, e) =>
-            {
-                MessageBox.Show("Создание объекта"); // Удаляем вкладку при нажатии на кнопку
             };
 
             // Добавляем вкладку в TabControl

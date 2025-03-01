@@ -22,7 +22,7 @@
             <TextBlock  Text="Акт о браке продукции" FontSize="14" MouseLeftButtonDown="NewTab"/>
             <TextBlock  Text="Итоговый отчёт" FontSize="14" MouseLeftButtonDown="NewTab"/>
         </StackPanel>
-
+        
 
         <!-- Контейнер вкладок -->
         <TabControl x:Name="TabsContainer" Grid.Column="1">

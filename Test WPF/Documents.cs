@@ -8,14 +8,11 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using System.Xml.Linq;
-using System.Text.RegularExpressions;
 
 namespace Test_WPF
 {
-    
     internal class Documents
     {
-        public AppContext db;
         [Key]
         public int document_id { get; set; }
         private int document_type, status, creator, registred;
@@ -59,10 +56,6 @@ namespace Test_WPF
         }
 
     }
-
-
-
-
 
     class Marriage_act : Documents
     {
@@ -170,13 +163,11 @@ namespace Test_WPF
         }
     }
 
+
     class Batch_report : Documents
     {
         bool GIIS_Accepted = false;
         bool Has_mairrage = false;
-        string BatchDate = null;
-        int ProductCount = 0;
-        int MarriageCount = 0;
 
         public Batch_report(int Type, int Creator) : base(Type, Creator) {}
         public Batch_report() { }
@@ -209,7 +200,6 @@ namespace Test_WPF
 
         public DockPanel DocTab() // метод пример как работать с вкладками
         {
-            db = new AppContext();
             // Создаем главный контейнер - DockPanel
             DockPanel mainDockPanel = new DockPanel
             {
@@ -230,31 +220,15 @@ namespace Test_WPF
                 Margin = new Thickness(0, 0, 0, 10)
             };
 
-            TextBox BoxBatchId = new TextBox { Margin = new Thickness(5), Width = 100 };
+            TextBox textBox1 = new TextBox { Margin = new Thickness(5), Width = 100 };
             TextBox textBox2 = new TextBox { Margin = new Thickness(5), Width = 100 };
-            TextBlock textBlock1 = new TextBlock { Margin = new Thickness(3) }; textBlock1.Text = "Номер партии:";
+            TextBlock textBlock1 = new TextBlock { Margin = new Thickness(3) }; textBlock1.Text = "123";
             TextBlock textBlock2 = new TextBlock { Margin = new Thickness(3) }; textBlock2.Text = "456";
 
             firstRow.Children.Add(textBlock1);
-            firstRow.Children.Add(BoxBatchId);
+            firstRow.Children.Add(textBox1);
             firstRow.Children.Add(textBlock2);
             firstRow.Children.Add(textBox2);
-
-            DataGrid datagrid = new DataGrid
-            {
-                AutoGenerateColumns = true, // Автогенерация столбцов
-                IsReadOnly = true, // Запрет редактирования
-                SelectionMode = DataGridSelectionMode.Single // Разрешить выбор только одной строки
-            };
-            //Productions productContetnt = null;
-            using (var context = new AppContext())
-            {
-                var productContetnt = context.Productions.Where(b => b.Batch_id == Convert.ToInt16(BoxBatchId.Text)).ToList();
-                datagrid.ItemsSource = productContetnt;
-            }
-
-
-            firstRow.Children.Add(datagrid);
 
             // Вторая строка: горизонтальный StackPanel с двумя TextBox
             StackPanel secondRow = new StackPanel
@@ -280,11 +254,11 @@ namespace Test_WPF
             // Создаем кнопку и привязываем ее к нижней части DockPanel
             Button button = new Button
             {
-                Content = "Сохранить",
+                Content = "Кнопка",
                 Margin = new Thickness(5),
                 Height = 20,
                 Width = 100,
-                HorizontalAlignment = HorizontalAlignment.Right,
+                HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Bottom,
                 // Выравнивание по левому краю
             };
@@ -390,6 +364,7 @@ namespace Test_WPF
             return mainDockPanel;
         }
     }
+
 
     class Final_report : Documents
     {

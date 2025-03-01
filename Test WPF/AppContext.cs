@@ -15,7 +15,6 @@ namespace Test_WPF
         public DbSet<Batch_report> Batch_report { get; set; }
         public DbSet<Accompanying_documents> Accompanying_documents { get; set; }
         public DbSet<Final_report> Final_report { get; set; }
-        public DbSet<Productions> Productions { get; set; }
 
         public AppContext() : base("DefaultConnection") { }
     }   
