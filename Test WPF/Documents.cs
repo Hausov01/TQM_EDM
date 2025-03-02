@@ -14,7 +14,7 @@ namespace Test_WPF
     internal class Documents
     {
         [Key]
-        public int document_id { get; set; }
+        public int Document_id { get; set; }
         private int document_type, status, creator, registred;
         private string date_change, date_creation;
 
@@ -35,7 +35,7 @@ namespace Test_WPF
         public Documents(int Type, int Creator)
         {
             //индексация
-            this.document_id = next_id;
+            this.Document_id = next_id;
             next_id++;
             // автоматическое назначение переменным значений
             this.document_type = Type;
@@ -48,7 +48,7 @@ namespace Test_WPF
 
         public string GetName()
         {
-            if (this.document_type == 1){ return "Сопроводительные документы";}
+            if (this.document_type == 1){ return "Накладная";}
             else if (this.document_type == 2){ return "Итоговый отчёт"; }
             else if (this.document_type == 3) { return "Отчёт о проверке партии"; }
             else if (this.document_type == 4) { return "Акт о браке продукции"; }
@@ -105,6 +105,15 @@ namespace Test_WPF
                 Margin = new Thickness(10)
             };
 
+            // строка заголовка
+            StackPanel TitleRow = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                Margin = new Thickness(0, 0, 0, 10)
+            };
+            TextBlock textBlock_Tital = new TextBlock { Margin = new Thickness(3) }; textBlock_Tital.Text = "Marriage_act";
+            TitleRow.Children.Add(textBlock_Tital);
+
             // Первая строка: горизонтальный StackPanel с двумя TextBox
             StackPanel firstRow = new StackPanel
             {
@@ -112,10 +121,12 @@ namespace Test_WPF
                 Margin = new Thickness(0, 0, 0, 10)
             };
 
+            
             TextBox textBox1 = new TextBox { Margin = new Thickness(5), Width = 100 };
             TextBox textBox2 = new TextBox { Margin = new Thickness(5), Width = 100 };
             TextBlock textBlock1 = new TextBlock { Margin = new Thickness(3) }; textBlock1.Text = "123";
             TextBlock textBlock2 = new TextBlock { Margin = new Thickness(3) }; textBlock2.Text = "456";
+
 
             firstRow.Children.Add(textBlock1);
             firstRow.Children.Add(textBox1);
@@ -136,6 +147,7 @@ namespace Test_WPF
             secondRow.Children.Add(textBox4);
 
             // Добавляем строки в контейнер текстовых полей
+            textFieldsPanel.Children.Add(TitleRow);
             textFieldsPanel.Children.Add(firstRow);
             textFieldsPanel.Children.Add(secondRow);
 
@@ -162,7 +174,6 @@ namespace Test_WPF
             return mainDockPanel;
         }
     }
-
 
     class Batch_report : Documents
     {
@@ -213,6 +224,15 @@ namespace Test_WPF
                 Margin = new Thickness(10)
             };
 
+            // строка заголовка
+            StackPanel TitleRow = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                Margin = new Thickness(0, 0, 0, 10)
+            };
+            TextBlock textBlock_Tital = new TextBlock { Margin = new Thickness(3) }; textBlock_Tital.Text = "Batch_report";
+            TitleRow.Children.Add(textBlock_Tital);
+
             // Первая строка: горизонтальный StackPanel с двумя TextBox
             StackPanel firstRow = new StackPanel
             {
@@ -244,6 +264,7 @@ namespace Test_WPF
             secondRow.Children.Add(textBox4);
 
             // Добавляем строки в контейнер текстовых полей
+            textFieldsPanel.Children.Add(TitleRow);
             textFieldsPanel.Children.Add(firstRow);
             textFieldsPanel.Children.Add(secondRow);
 
@@ -307,6 +328,15 @@ namespace Test_WPF
                 Margin = new Thickness(10)
             };
 
+            // строка заголовка
+            StackPanel TitleRow = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                Margin = new Thickness(0, 0, 0, 10)
+            };
+            TextBlock textBlock_Tital = new TextBlock { Margin = new Thickness(3) }; textBlock_Tital.Text = "Invoice";
+            TitleRow.Children.Add(textBlock_Tital);
+
             // Первая строка: горизонтальный StackPanel с двумя TextBox
             StackPanel firstRow = new StackPanel
             {
@@ -338,6 +368,7 @@ namespace Test_WPF
             secondRow.Children.Add(textBox4);
 
             // Добавляем строки в контейнер текстовых полей
+            textFieldsPanel.Children.Add(TitleRow);
             textFieldsPanel.Children.Add(firstRow);
             textFieldsPanel.Children.Add(secondRow);
 
@@ -364,7 +395,6 @@ namespace Test_WPF
             return mainDockPanel;
         }
     }
-
 
     class Final_report : Documents
     {
@@ -406,6 +436,15 @@ namespace Test_WPF
                 Margin = new Thickness(10)
             };
 
+            //строка заголовка
+            StackPanel TitleRow = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                Margin = new Thickness(0, 0, 0, 10)
+            };
+            TextBlock textBlock_Tital = new TextBlock { Margin = new Thickness(3) }; textBlock_Tital.Text = "Final_report";
+            TitleRow.Children.Add(textBlock_Tital);
+
             // Первая строка: горизонтальный StackPanel с двумя TextBox
             StackPanel firstRow = new StackPanel
             {
@@ -437,6 +476,7 @@ namespace Test_WPF
             secondRow.Children.Add(textBox4);
 
             // Добавляем строки в контейнер текстовых полей
+            textFieldsPanel.Children.Add(TitleRow);
             textFieldsPanel.Children.Add(firstRow);
             textFieldsPanel.Children.Add(secondRow);
 

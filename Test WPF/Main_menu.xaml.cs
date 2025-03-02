@@ -30,7 +30,7 @@ namespace Test_WPF
             TextBlock clickedTextBlock = (TextBlock)sender;
             switch (clickedTextBlock.Text)
             {
-                case "Сопроводительные документы":
+                case "Накладная":
                     Accompanying_documents document1 = new Accompanying_documents(1,1);
                     new Tab(TabsContainer, document1);
                     break;
@@ -50,6 +50,14 @@ namespace Test_WPF
                     MessageBox.Show("Ошибка при создании вкладки");
                     break;
             }
+
+        }
+        private void DeleteDoc(object sender, RoutedEventArgs e) 
+        { 
+
+        }
+        private void CreateDoc(object sender, RoutedEventArgs e)
+        {
 
         }
 

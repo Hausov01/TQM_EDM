@@ -17,6 +17,9 @@ namespace Test_WPF
         public DbSet<Final_report> Final_report { get; set; }
 
         public AppContext() : base("DefaultConnection") { }
+
+
+
     }   
 
 }

@@ -18,7 +18,7 @@ namespace Test_WPF
     internal class Tab
     {
         AppContext db;
-        public Tab(TabControl TabsContainer, Documents document, object selectedItem) // конструктор документа
+        public Tab(TabControl TabsContainer, Documents document, object selectedItem) // конструктор нового документа
         {
             db = new AppContext();
             ListBox notesList = new ListBox();
@@ -27,23 +27,23 @@ namespace Test_WPF
             // Приведение типов
             if (document is Marriage_act)
             {
-                Marriage_act MAct = (Marriage_act)document; 
-                Contetnt = MAct.DocTab();
+                Marriage_act DocBody = (Marriage_act)document; 
+                Contetnt = DocBody.DocTab();
             }
             if (document is Batch_report)
             {
-                Batch_report MAct = (Batch_report)document;
-                Contetnt = MAct.DocTab();
+                Batch_report DocBody = (Batch_report)document;
+                Contetnt = DocBody.DocTab();
             }
             if (document is Accompanying_documents)
             {
-                Accompanying_documents MAct = (Accompanying_documents)document;
-                Contetnt = MAct.DocTab();
+                Accompanying_documents DocBody = (Accompanying_documents)document;
+                Contetnt = DocBody.DocTab();
             }
             if (document is Final_report)
             {
-                Final_report MAct = (Final_report)document;
-                Contetnt = MAct.DocTab();
+                Final_report DocBody = (Final_report)document;
+                Contetnt = DocBody.DocTab();
             }
 
             // Создаем кастомный заголовок вкладки
@@ -138,7 +138,7 @@ namespace Test_WPF
         
 
         
-        public DockPanel RosterPaste(Documents document, TabControl TabsContainer)
+        public DockPanel RosterPaste(Documents document, TabControl TabsContainer)// метод для вывода списка экземпляров документа
         {
             DockPanel dockpanel = new DockPanel { LastChildFill = true };
             DataGrid datagrid = new DataGrid
@@ -153,32 +153,32 @@ namespace Test_WPF
             {
                 using (var context = new AppContext())
                 {
-                    var MActs = context.Accompanying_documents.ToList();
-                    datagrid.ItemsSource = MActs;
+                    var DocBody = context.Accompanying_documents.ToList();
+                    datagrid.ItemsSource = DocBody;
                 }
             }
             else if (document.Document_type == 2)
             {
                 using (var context = new AppContext())
                 {
-                    var MActs = context.Final_report.ToList();
-                    datagrid.ItemsSource = MActs;
+                    var DocBody = context.Final_report.ToList();
+                    datagrid.ItemsSource = DocBody;
                 }
             }
             else if (document.Document_type == 3)
             {
                 using (var context = new AppContext())
                 {
-                    var MActs = context.Batch_report.ToList();
-                    datagrid.ItemsSource = MActs;
+                    var DocBody = context.Batch_report.ToList();
+                    datagrid.ItemsSource = DocBody;
                 }
             }
             else if (document.Document_type == 4)
             {
                 using (var context = new AppContext())
                 {
-                    var MActs = context.Product_marriage_acts.ToList();
-                    datagrid.ItemsSource = MActs;
+                    var DocBody = context.Product_marriage_acts.ToList();
+                    datagrid.ItemsSource = DocBody;
                 }
             }
             else
@@ -198,7 +198,7 @@ namespace Test_WPF
 
             dockpanel.Children.Add(datagrid);
             return dockpanel;
-        }// метод для вывода списка экземпляров документа
+        }
         
         private void HandleItemClick(object selectedItem, Documents document, TabControl TabsContainer)// Метод для обработки нажатия на экземпляр документа
         {
@@ -206,7 +206,7 @@ namespace Test_WPF
             //MessageBox.Show($"Выбран элемент: {selectedItem}");
             switch (document.GetName())
             {
-                case "Сопроводительные документы":
+                case "Накладная":
                     Accompanying_documents document1 = new Accompanying_documents(1, 1);
                     new Tab(TabsContainer, document, selectedItem);
                     break;
@@ -228,6 +228,10 @@ namespace Test_WPF
             }
             
         }
+
+        private void DeleteDoc() { }
+
+        
 
         
         /*public DockPanel UsualTab() // метод пример как работать с вкладками
