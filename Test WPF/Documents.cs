@@ -49,8 +49,8 @@ namespace Test_WPF
 
         public string GetName()
         {
-            if (this.document_type == 1){ return "Накладная";}
-            else if (this.document_type == 2){ return "Итоговый отчёт"; }
+            if (this.document_type == 1) { return "Накладная"; }
+            else if (this.document_type == 2) { return "Итоговый отчёт"; }
             else if (this.document_type == 3) { return "Отчёт о проверке партии"; }
             else if (this.document_type == 4) { return "Акт о браке продукции"; }
             return "id типа документа некорректен";
@@ -93,6 +93,23 @@ namespace Test_WPF
 
         public DockPanel DocTab() // метод пример как работать с вкладками
         {
+            List<Marriage_act> data;
+            using (var context = new AppContext()) 
+            { 
+                data = context.Product_marriage_acts.ToList();
+            }
+
+            if (data != null && data.Any())
+            {
+                Production_UIN = data[0].Production_UIN;
+                Conclusion = data[0].Conclusion;
+            }
+            else
+            {
+                // Обработка случая, когда данные отсутствуют
+                MessageBox.Show("Данные не найдены в таблице Product_marriage_acts.");
+            }
+            
             // Создаем главный контейнер - DockPanel
             DockPanel mainDockPanel = new DockPanel
             {
@@ -131,7 +148,7 @@ namespace Test_WPF
 
             
             TextBox textBox1 = new TextBox { Margin = new Thickness(5), Width = 100, Text = Convert.ToString(Production_UIN)};
-            TextBox textBox2 = new TextBox { Margin = new Thickness(5), Width = 100, Text = Convert.ToString(Conclusion) };
+            TextBox textBox2 = new TextBox { Margin = new Thickness(5), Width = 100, Text = Convert.ToString(data[0].Conclusion) };
             TextBlock textBlock1 = new TextBlock { Margin = new Thickness(3) }; textBlock1.Text = "production_UIN";
             TextBlock textBlock2 = new TextBlock { Margin = new Thickness(3) }; textBlock2.Text = "conclusion";
 

@@ -17,9 +17,6 @@ namespace Test_WPF
 {
     internal class Tab
     {
-        private DataGrid datagrid;
-        
-
         AppContext db;
         public Tab(TabControl TabsContainer, Object document, string something) // конструктор нового документа
         {
@@ -150,7 +147,7 @@ namespace Test_WPF
                 CanVerticallyScroll = true,
             };
 
-            datagrid = new DataGrid
+            DataGrid datagrid = new DataGrid
             {
                 AutoGenerateColumns = true, // Автогенерация столбцов
                 IsReadOnly = true, // Запрет редактирования
@@ -216,6 +213,7 @@ namespace Test_WPF
                 if (selectedItem != null)
                 {
                     new Tab(TabsContainer, selectedItem, "something"); //Открываем вкладку с данными документа
+                    datagrid.SelectedItem = null;
                 }
             };
 
@@ -249,95 +247,5 @@ namespace Test_WPF
             dockpanel.Children.Add(datagrid);
             return dockpanel;
         }
-
-        private void Window_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            // Проверяем, был ли клик вне DataGrid
-            if (!IsMouseOverDataGrid(e))
-            {
-                datagrid.SelectedItem = null; // Сбрасываем выделение
-            }
-        }
-
-        private bool IsMouseOverDataGrid(MouseButtonEventArgs e)
-        {
-            // Проверяем, находится ли курсор над DataGrid
-            var hit = VisualTreeHelper.HitTest(datagrid, e.GetPosition(datagrid));
-            return hit != null;
-        }
-
-
-        /*public DockPanel UsualTab() // метод пример как работать с вкладками
-        {
-            // Создаем главный контейнер - DockPanel
-            DockPanel mainDockPanel = new DockPanel
-            {
-                LastChildFill = true // Последний элемент заполняет оставшееся пространство
-            };
-
-            // Создаем контейнер для текстовых полей (вертикальный StackPanel)
-            StackPanel textFieldsPanel = new StackPanel
-            {
-                Orientation = Orientation.Vertical,
-                Margin = new Thickness(10)
-            };
-
-            // Первая строка: горизонтальный StackPanel с двумя TextBox
-            StackPanel firstRow = new StackPanel
-            {
-                Orientation = Orientation.Horizontal,
-                Margin = new Thickness(0, 0, 0, 10)
-            };
-
-            TextBox textBox1 = new TextBox { Margin = new Thickness(5), Width = 100 };
-            TextBox textBox2 = new TextBox { Margin = new Thickness(5), Width = 100 };
-            TextBlock textBlock1 = new TextBlock { Margin = new Thickness(3) }; textBlock1.Text = "123";
-            TextBlock textBlock2 = new TextBlock { Margin = new Thickness(3) }; textBlock2.Text = "456";
-
-            firstRow.Children.Add(textBlock1);
-            firstRow.Children.Add(textBox1);
-            firstRow.Children.Add(textBlock2);
-            firstRow.Children.Add(textBox2);
-
-            // Вторая строка: горизонтальный StackPanel с двумя TextBox
-            StackPanel secondRow = new StackPanel
-            {
-                Orientation = Orientation.Horizontal,
-                Margin = new Thickness(0, 0, 0, 10)
-            };
-
-            TextBox textBox3 = new TextBox { Margin = new Thickness(5), Width = 100 };
-            TextBox textBox4 = new TextBox { Margin = new Thickness(5), Width = 100 };
-
-            secondRow.Children.Add(textBox3);
-            secondRow.Children.Add(textBox4);
-
-            // Добавляем строки в контейнер текстовых полей
-            textFieldsPanel.Children.Add(firstRow);
-            textFieldsPanel.Children.Add(secondRow);
-
-            // Добавляем контейнер текстовых полей в DockPanel
-            DockPanel.SetDock(textFieldsPanel, Dock.Top); // Привязываем к верхней части
-            mainDockPanel.Children.Add(textFieldsPanel);
-
-            // Создаем кнопку и привязываем ее к нижней части DockPanel
-            Button button = new Button
-            {
-                Content = "Кнопка",
-                Margin = new Thickness(5),
-                Height = 20,
-                Width = 100,
-                HorizontalAlignment = HorizontalAlignment.Left,
-                VerticalAlignment = VerticalAlignment.Bottom,
-                // Выравнивание по левому краю
-            };
-
-            DockPanel.SetDock(button, Dock.Bottom); // Привязываем к нижней части
-            mainDockPanel.Children.Add(button);
-
-            // Устанавливаем главный DockPanel как содержимое окна
-            return mainDockPanel;
-        }*/
-
     }
 }
