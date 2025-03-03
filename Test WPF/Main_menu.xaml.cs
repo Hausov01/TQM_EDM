@@ -31,7 +31,7 @@ namespace Test_WPF
             switch (clickedTextBlock.Text)
             {
                 case "Накладная":
-                    Accompanying_documents document1 = new Accompanying_documents(1,1);
+                    Invoice document1 = new Invoice(1,1);
                     new Tab(TabsContainer, document1);
                     break;
                 case "Отчёт о проверке партии":

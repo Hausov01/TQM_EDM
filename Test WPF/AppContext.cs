@@ -13,7 +13,7 @@ namespace Test_WPF
         public DbSet<Document_type> Document_types { get; set; }
         public DbSet<Marriage_act> Product_marriage_acts { get; set; }
         public DbSet<Batch_report> Batch_report { get; set; }
-        public DbSet<Accompanying_documents> Accompanying_documents { get; set; }
+        public DbSet<Invoice> Invoice { get; set; }
         public DbSet<Final_report> Final_report { get; set; }
 
         public AppContext() : base("DefaultConnection") { }

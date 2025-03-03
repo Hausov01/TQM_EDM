@@ -35,9 +35,9 @@ namespace Test_WPF
                 Batch_report DocBody = (Batch_report)document;
                 Contetnt = DocBody.DocTab();
             }
-            if (document is Accompanying_documents)
+            if (document is Invoice)
             {
-                Accompanying_documents DocBody = (Accompanying_documents)document;
+                Invoice DocBody = (Invoice)document;
                 Contetnt = DocBody.DocTab();
             }
             if (document is Final_report)
@@ -153,7 +153,7 @@ namespace Test_WPF
             {
                 using (var context = new AppContext())
                 {
-                    var DocBody = context.Accompanying_documents.ToList();
+                    var DocBody = context.Invoice.ToList();
                     datagrid.ItemsSource = DocBody;
                 }
             }
@@ -207,7 +207,7 @@ namespace Test_WPF
             switch (document.GetName())
             {
                 case "Накладная":
-                    Accompanying_documents document1 = new Accompanying_documents(1, 1);
+                    Invoice document1 = new Invoice(1, 1);
                     new Tab(TabsContainer, document, selectedItem);
                     break;
                 case "Отчёт о проверке партии":

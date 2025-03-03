@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using System.Xml.Linq;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Test_WPF
 {
@@ -199,7 +200,7 @@ namespace Test_WPF
                     Status = 1;
                     return null;
                 case 5:
-                    return new Accompanying_documents(1, 1);
+                    return new Invoice(1, 1);
                 case 6:
                     return new Marriage_act(1, 1, 1);
                 case 7:
@@ -292,11 +293,12 @@ namespace Test_WPF
         }
     }
 
-    class Accompanying_documents : Documents
+    [Table("Invoice")]
+    class Invoice : Documents
     {
-        public Accompanying_documents(int Type, int Creator) : base(Type, Creator) {}
+        public Invoice(int Type, int Creator) : base(Type, Creator) {}
 
-        public Accompanying_documents() { }
+        public Invoice() { }
 
         public void Action(int Action_id)
         {
