@@ -25,7 +25,7 @@ namespace Test_WPF
             InitializeComponent();
         }
 
-        public void NewTab(object sender, RoutedEventArgs e)
+        public void NewTab(object sender, RoutedEventArgs e) //создание вкладки со списком документов
         {
             TextBlock clickedTextBlock = (TextBlock)sender;
             switch (clickedTextBlock.Text)
@@ -56,9 +56,32 @@ namespace Test_WPF
         { 
 
         }
+
         private void CreateDoc(object sender, RoutedEventArgs e)
         {
-
+            Documents document = new Documents();   
+            switch (document.GetName())
+            {
+                case "Накладная":
+                    Invoice document1 = new Invoice(1, 1);
+                    new Tab(TabsContainer, document1, "something");
+                    break;
+                case "Отчёт о проверке партии":
+                    Batch_report document2 = new Batch_report(3, 1);
+                    new Tab(TabsContainer, document2, "something");
+                    break;
+                case "Акт о браке продукции":
+                    Marriage_act document3 = new Marriage_act(4, 1, 1);
+                    new Tab(TabsContainer, document3, "something");
+                    break;
+                case "Итоговый отчёт":
+                    Final_report document4 = new Final_report(2, 1);
+                    new Tab(TabsContainer, document4, "something");
+                    break;
+                default:
+                    MessageBox.Show("Ошибка при создании вкладки");
+                    break;
+            }
         }
 
     }

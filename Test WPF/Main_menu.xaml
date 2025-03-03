@@ -26,14 +26,9 @@
         <!-- Контейнер вкладок и дополнительная строка -->
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.1*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Horizontal">
-                <Button Content="Создать" HorizontalAlignment="Center" Width="60" Margin="10 10" FontSize="15" Click="CreateDoc"/>
-                <Button Content="Удалить" HorizontalAlignment="Center" Width="60" Margin="10 10" FontSize="15" Click="DeleteDoc"/>
-            </StackPanel>
 
                     <!-- контейнер вкладок -->
             <TabControl x:Name="TabsContainer" Grid.Row="1">

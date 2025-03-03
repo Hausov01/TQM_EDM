@@ -112,6 +112,13 @@ namespace Test_WPF
                 Orientation = Orientation.Horizontal,
                 Margin = new Thickness(0, 0, 0, 10)
             };
+
+            StackPanel ToolBar = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                Margin = new Thickness(10)
+            };
+
             TextBlock textBlock_Tital = new TextBlock { Margin = new Thickness(3) }; textBlock_Tital.Text = "Marriage_act";
             TitleRow.Children.Add(textBlock_Tital);
 
@@ -123,10 +130,10 @@ namespace Test_WPF
             };
 
             
-            TextBox textBox1 = new TextBox { Margin = new Thickness(5), Width = 100 };
-            TextBox textBox2 = new TextBox { Margin = new Thickness(5), Width = 100 };
-            TextBlock textBlock1 = new TextBlock { Margin = new Thickness(3) }; textBlock1.Text = "123";
-            TextBlock textBlock2 = new TextBlock { Margin = new Thickness(3) }; textBlock2.Text = "456";
+            TextBox textBox1 = new TextBox { Margin = new Thickness(5), Width = 100, Text = Convert.ToString(Production_UIN)};
+            TextBox textBox2 = new TextBox { Margin = new Thickness(5), Width = 100, Text = Convert.ToString(Conclusion) };
+            TextBlock textBlock1 = new TextBlock { Margin = new Thickness(3) }; textBlock1.Text = "production_UIN";
+            TextBlock textBlock2 = new TextBlock { Margin = new Thickness(3) }; textBlock2.Text = "conclusion";
 
 
             firstRow.Children.Add(textBlock1);
@@ -156,20 +163,26 @@ namespace Test_WPF
             DockPanel.SetDock(textFieldsPanel, Dock.Top); // Привязываем к верхней части
             mainDockPanel.Children.Add(textFieldsPanel);
 
-            // Создаем кнопку и привязываем ее к нижней части DockPanel
-            Button button = new Button
+            StackPanel Basement = new StackPanel// нижняя часть вкладки
             {
-                Content = "Кнопка",
-                Margin = new Thickness(5),
-                Height = 20,
-                Width = 100,
-                HorizontalAlignment = HorizontalAlignment.Left,
-                VerticalAlignment = VerticalAlignment.Bottom,
-                // Выравнивание по левому краю
+                Orientation = Orientation.Horizontal,
+                Margin = new Thickness(5)
             };
 
-            DockPanel.SetDock(button, Dock.Bottom); // Привязываем к нижней части
-            mainDockPanel.Children.Add(button);
+            Button SaveDoc = new Button//кнопка сохранения 
+            { 
+                Content = "Сохранить", 
+                Margin = new Thickness(10),
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Bottom,
+            };
+            Basement.Children.Add(SaveDoc);
+
+            SaveDoc.Click += (sender, e) => { };
+
+
+            DockPanel.SetDock(SaveDoc, Dock.Bottom); // Привязываем к нижней части
+            mainDockPanel.Children.Add(Basement);
 
             // Устанавливаем главный DockPanel как содержимое окна
             return mainDockPanel;

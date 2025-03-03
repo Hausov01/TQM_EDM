@@ -17,11 +17,15 @@ namespace Test_WPF
 {
     internal class Tab
     {
+        private DataGrid datagrid;
+        
+
         AppContext db;
-        public Tab(TabControl TabsContainer, Documents document, object selectedItem) // конструктор нового документа
+        public Tab(TabControl TabsContainer, Object document, string something) // конструктор нового документа
         {
             db = new AppContext();
             ListBox notesList = new ListBox();
+            var tabText = new TextBlock();
 
             DockPanel Contetnt = new DockPanel();
             // Приведение типов
@@ -29,28 +33,29 @@ namespace Test_WPF
             {
                 Marriage_act DocBody = (Marriage_act)document; 
                 Contetnt = DocBody.DocTab();
+                tabText = new TextBlock { Text = "Акт о браке продукции"};// Текст вкладки
             }
             if (document is Batch_report)
             {
                 Batch_report DocBody = (Batch_report)document;
                 Contetnt = DocBody.DocTab();
+                tabText = new TextBlock { Text = "Отчёт о проверке партии" };// Текст вкладки
             }
             if (document is Invoice)
             {
                 Invoice DocBody = (Invoice)document;
                 Contetnt = DocBody.DocTab();
+                tabText = new TextBlock { Text = "Накладная" };// Текст вкладки
             }
             if (document is Final_report)
             {
                 Final_report DocBody = (Final_report)document;
                 Contetnt = DocBody.DocTab();
+                tabText = new TextBlock { Text = "Итоговый отчёт" };// Текст вкладки
             }
 
             // Создаем кастомный заголовок вкладки
             var headerPanel = new StackPanel { Orientation = Orientation.Horizontal };
-
-            // Текст вкладки
-            var tabText = new TextBlock { Text = document.GetName() };
 
             // Кнопка закрытия
             var closeButton = new Button
@@ -91,7 +96,7 @@ namespace Test_WPF
             db = new AppContext();
             ListBox notesList = new ListBox();
 
-            DockPanel roster = new DockPanel();
+            StackPanel roster = new StackPanel();
             roster = RosterPaste(document, TabsContainer);
 
             // Создаем кастомный заголовок вкладки
@@ -138,15 +143,32 @@ namespace Test_WPF
         
 
         
-        public DockPanel RosterPaste(Documents document, TabControl TabsContainer)// метод для вывода списка экземпляров документа
+        public StackPanel RosterPaste(Documents document, TabControl TabsContainer)// метод для вывода списка экземпляров документа
         {
-            DockPanel dockpanel = new DockPanel { LastChildFill = true };
-            DataGrid datagrid = new DataGrid
+            StackPanel dockpanel = new StackPanel 
+            {
+                CanVerticallyScroll = true,
+            };
+
+            datagrid = new DataGrid
             {
                 AutoGenerateColumns = true, // Автогенерация столбцов
                 IsReadOnly = true, // Запрет редактирования
-                SelectionMode = DataGridSelectionMode.Single // Разрешить выбор только одной строки
+                SelectionMode = DataGridSelectionMode.Single, // Разрешить выбор только одной строки
+                HorizontalAlignment = HorizontalAlignment.Stretch, // Растягиваем по горизонтали
+                VerticalAlignment = VerticalAlignment.Stretch,
             };
+
+            StackPanel ToolBar = new StackPanel
+            {
+                Orientation = Orientation.Horizontal,
+                Margin = new Thickness(5)
+            };
+
+            Button CreateDoc = new Button { Content = "Создать", Margin = new Thickness(10) };
+            Button DeleteDoc = new Button { Content = "Удалить", Margin = new Thickness(10) };
+            ToolBar.Children.Add(CreateDoc);
+            ToolBar.Children.Add(DeleteDoc);
 
             // Загрузка данных в зависимости от типа документа
             if (document.Document_type == 1)
@@ -186,54 +208,65 @@ namespace Test_WPF
                 MessageBox.Show("Ошибка открытия вкладки");
             }
 
+
             // Добавляем обработчик события выбора строки
             datagrid.SelectionChanged += (sender, e) =>
             {
                 var selectedItem = datagrid.SelectedItem;
                 if (selectedItem != null)
                 {
-                    HandleItemClick(selectedItem, document, TabsContainer); // Вызов метода обработки нажатия
+                    new Tab(TabsContainer, selectedItem, "something"); //Открываем вкладку с данными документа
                 }
             };
 
+            CreateDoc.Click += (sender, e) =>
+            {
+                switch (document.GetName())
+                {
+                    case "Накладная":
+                        Invoice document1 = new Invoice(1, 1);
+                        new Tab(TabsContainer, document, "something");
+                        break;
+                    case "Отчёт о проверке партии":
+                        Batch_report document2 = new Batch_report(3, 1);
+                        new Tab(TabsContainer, document, "something");
+                        break;
+                    case "Акт о браке продукции":
+                        Marriage_act document3 = new Marriage_act(4, 1, 1);
+                        new Tab(TabsContainer, document, "something");
+                        break;
+                    case "Итоговый отчёт":
+                        Final_report document4 = new Final_report(2, 1);
+                        new Tab(TabsContainer, document, "something");
+                        break;
+                    default:
+                        MessageBox.Show("Ошибка при создании вкладки");
+                        break;
+                }
+            };
+            
+            dockpanel.Children.Add(ToolBar);
             dockpanel.Children.Add(datagrid);
             return dockpanel;
         }
-        
-        private void HandleItemClick(object selectedItem, Documents document, TabControl TabsContainer)// Метод для обработки нажатия на экземпляр документа
+
+        private void Window_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            // Здесь можно добавить логику обработки выбранного элемента
-            //MessageBox.Show($"Выбран элемент: {selectedItem}");
-            switch (document.GetName())
+            // Проверяем, был ли клик вне DataGrid
+            if (!IsMouseOverDataGrid(e))
             {
-                case "Накладная":
-                    Invoice document1 = new Invoice(1, 1);
-                    new Tab(TabsContainer, document, selectedItem);
-                    break;
-                case "Отчёт о проверке партии":
-                    Batch_report document2 = new Batch_report(3, 1);
-                    new Tab(TabsContainer, document, selectedItem);
-                    break;
-                case "Акт о браке продукции":
-                    Marriage_act document3 = new Marriage_act(4, 1, 1);
-                    new Tab(TabsContainer, document, selectedItem);
-                    break;
-                case "Итоговый отчёт":
-                    Final_report document4 = new Final_report(2, 1);
-                    new Tab(TabsContainer, document, selectedItem);
-                    break;
-                default:
-                    MessageBox.Show("Ошибка при создании вкладки");
-                    break;
+                datagrid.SelectedItem = null; // Сбрасываем выделение
             }
-            
         }
 
-        private void DeleteDoc() { }
+        private bool IsMouseOverDataGrid(MouseButtonEventArgs e)
+        {
+            // Проверяем, находится ли курсор над DataGrid
+            var hit = VisualTreeHelper.HitTest(datagrid, e.GetPosition(datagrid));
+            return hit != null;
+        }
 
-        
 
-        
         /*public DockPanel UsualTab() // метод пример как работать с вкладками
         {
             // Создаем главный контейнер - DockPanel
