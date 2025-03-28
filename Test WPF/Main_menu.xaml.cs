@@ -31,19 +31,19 @@ namespace Test_WPF
             switch (clickedTextBlock.Text)
             {
                 case "Накладная":
-                    Invoice document1 = new Invoice(1,1);
+                    Invoice document1 = new Invoice(1);
                     new Tab(TabsContainer, document1);
                     break;
                 case "Отчёт о проверке партии":
-                    Batch_report document2 = new Batch_report(3, 1);
+                    Batch_report document2 = new Batch_report(1);
                     new Tab(TabsContainer, document2);
                     break;
                 case "Акт о браке продукции":
-                    Marriage_act document3 = new Marriage_act(4, 1, 1);
+                    Marriage_act document3 = new Marriage_act(1, 1);
                     new Tab(TabsContainer, document3);
                     break;
                 case "Итоговый отчёт":
-                    Final_report document4 = new Final_report(2, 1);
+                    Final_report document4 = new Final_report(1);
                     new Tab(TabsContainer, document4);
                     break;
                 default: 
@@ -63,19 +63,19 @@ namespace Test_WPF
             switch (document.GetName())
             {
                 case "Накладная":
-                    Invoice document1 = new Invoice(1, 1);
+                    Invoice document1 = new Invoice(1);
                     new Tab(TabsContainer, document1, "something");
                     break;
                 case "Отчёт о проверке партии":
-                    Batch_report document2 = new Batch_report(3, 1);
+                    Batch_report document2 = new Batch_report(1);
                     new Tab(TabsContainer, document2, "something");
                     break;
                 case "Акт о браке продукции":
-                    Marriage_act document3 = new Marriage_act(4, 1, 1);
+                    Marriage_act document3 = new Marriage_act(1, 1);
                     new Tab(TabsContainer, document3, "something");
                     break;
                 case "Итоговый отчёт":
-                    Final_report document4 = new Final_report(2, 1);
+                    Final_report document4 = new Final_report(1);
                     new Tab(TabsContainer, document4, "something");
                     break;
                 default:

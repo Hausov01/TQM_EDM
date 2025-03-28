@@ -17,10 +17,24 @@
 
         <!-- Меню -->
         <StackPanel>
-            <TextBlock  Text="Накладная" FontSize="14" MouseLeftButtonDown="NewTab"/>
-            <TextBlock  Text="Отчёт о проверке партии" FontSize="14" MouseLeftButtonDown="NewTab"/>
-            <TextBlock  Text="Акт о браке продукции" FontSize="14" MouseLeftButtonDown="NewTab"/>
-            <TextBlock  Text="Итоговый отчёт" FontSize="14" MouseLeftButtonDown="NewTab"/>
+            <TextBlock  Text="Докумменты" FontSize="14" Padding="10,8,0,3" FontWeight="Bold"/>
+            <TextBlock  Text="Накладная" FontSize="14" MouseLeftButtonDown="NewTab" Padding="10,3,0,3"/>
+            <TextBlock  Text="Отчёт о проверке партии" FontSize="14" MouseLeftButtonDown="NewTab" Padding="10,3,0,3"/>
+            <TextBlock  Text="Акт о браке продукции" FontSize="14" MouseLeftButtonDown="NewTab" Padding="10,3,0,3"/>
+            <TextBlock  Text="Итоговый отчёт" FontSize="14" MouseLeftButtonDown="NewTab" Padding="10,3,0,3"/>
+            <TextBlock  Text="НСИ" FontSize="14" Padding="10,8,0,3" FontWeight="Bold"/>
+            <TextBlock  Text="Поставщики" FontSize="14" Padding="10,3,0,3"/>
+            <TextBlock  Text="Партии" FontSize="14" Padding="10,3,0,3"/>
+            <TextBlock  Text="Накадные" FontSize="14" Padding="10,3,0,3"/>
+            <TextBlock  Text="Изделия" FontSize="14" Padding="10,3,0,3"/>
+            <TextBlock  Text="Справоники" FontSize="14" Padding="10,8,0,3" FontWeight="Bold"/>
+            <TextBlock  Text="Типы изделий" FontSize="14" Padding="10,3,0,3"/>
+            <TextBlock  Text="Типы документов" FontSize="14" Padding="10,3,0,3"/>
+            <TextBlock  Text="Должности" FontSize="14" Padding="10,3,0,3"/>
+            <TextBlock  Text="Администрирование" FontSize="14" Padding="10,8,0,3" FontWeight="Bold"/>
+            <TextBlock  Text="Пользователи" FontSize="14" Padding="10,3,0,3"/>
+
+
         </StackPanel>
 
         <!-- Контейнер вкладок и дополнительная строка -->

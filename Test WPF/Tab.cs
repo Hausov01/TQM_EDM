@@ -12,6 +12,7 @@ using System.Data.SQLite;
 using System.Xml.Linq;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Documents;
 
 namespace Test_WPF
 {
@@ -25,31 +26,55 @@ namespace Test_WPF
             var tabText = new TextBlock();
 
             DockPanel Contetnt = new DockPanel();
+
+            tabText = new TextBlock // Текст вкладки
+            {
+                FontFamily = new FontFamily("Segoe MDL2 Assets"),
+                Text = "\xF000",
+            };
+
             // Приведение типов
             if (document is Marriage_act)
             {
                 Marriage_act DocBody = (Marriage_act)document; 
                 Contetnt = DocBody.DocTab();
-                tabText = new TextBlock { Text = "Акт о браке продукции"};// Текст вкладки
+                tabText.Inlines.Add(new Run
+                {
+                    FontFamily = new FontFamily("Segoe UI"),
+                    Text = " Акт о браке продукции",
+                });
             }
             if (document is Batch_report)
             {
                 Batch_report DocBody = (Batch_report)document;
                 Contetnt = DocBody.DocTab();
-                tabText = new TextBlock { Text = "Отчёт о проверке партии" };// Текст вкладки
+                tabText.Inlines.Add(new Run
+                {
+                    FontFamily = new FontFamily("Segoe UI"),
+                    Text = " Отчёт о проверке партии",
+                });
             }
             if (document is Invoice)
             {
                 Invoice DocBody = (Invoice)document;
                 Contetnt = DocBody.DocTab();
-                tabText = new TextBlock { Text = "Накладная" };// Текст вкладки
+                tabText.Inlines.Add(new Run
+                {
+                    FontFamily = new FontFamily("Segoe UI"),
+                    Text = " Накладная",
+                });
             }
             if (document is Final_report)
             {
                 Final_report DocBody = (Final_report)document;
                 Contetnt = DocBody.DocTab();
-                tabText = new TextBlock { Text = "Итоговый отчёт" };// Текст вкладки
+                tabText.Inlines.Add(new Run
+                {
+                    FontFamily = new FontFamily("Segoe UI"), 
+                    Text = " Итоговый отчёт",
+                });
             }
+            
 
             // Создаем кастомный заголовок вкладки
             var headerPanel = new StackPanel { Orientation = Orientation.Horizontal };
@@ -88,7 +113,7 @@ namespace Test_WPF
             TabsContainer.SelectedItem = tabItem;// делаем вкладку активной
         }
 
-        public Tab(TabControl TabsContainer, Documents document)// конструктор с списком
+        public Tab(TabControl TabsContainer, Documents document)// конструктор списочной формы
         {
             db = new AppContext();
             ListBox notesList = new ListBox();
@@ -100,7 +125,16 @@ namespace Test_WPF
             var headerPanel = new StackPanel { Orientation = Orientation.Horizontal };
 
             // Текст вкладки
-            var tabText = new TextBlock { Text = document.GetName() };
+            var tabText = new TextBlock
+            {
+                FontFamily = new FontFamily("Segoe MDL2 Assets"),
+                Text = "\xE71D", // Иконка "Add" (E71D)
+            };
+            tabText.Inlines.Add(new Run
+            {
+                FontFamily = new FontFamily("Segoe UI"),
+                Text = " " + document.GetName(),
+            });
 
             // Кнопка закрытия
             var closeButton = new Button
@@ -202,7 +236,7 @@ namespace Test_WPF
             }
             else
             {
-                MessageBox.Show("Ошибка открытия вкладки");
+                MessageBox.Show("Ошибка открытия вкладки id: " + Convert.ToString(document.Document_type));
             }
 
 
@@ -222,23 +256,23 @@ namespace Test_WPF
                 switch (document.GetName())
                 {
                     case "Накладная":
-                        Invoice document1 = new Invoice(1, 1);
-                        new Tab(TabsContainer, document, "something");
+                        Invoice document1 = new Invoice(1);
+                        new Tab(TabsContainer, document, "something"); 
                         break;
                     case "Отчёт о проверке партии":
-                        Batch_report document2 = new Batch_report(3, 1);
+                        Batch_report document2 = new Batch_report (1);
                         new Tab(TabsContainer, document, "something");
                         break;
                     case "Акт о браке продукции":
-                        Marriage_act document3 = new Marriage_act(4, 1, 1);
+                        Marriage_act document3 = new Marriage_act(1, 1);
                         new Tab(TabsContainer, document, "something");
                         break;
                     case "Итоговый отчёт":
-                        Final_report document4 = new Final_report(2, 1);
+                        Final_report document4 = new Final_report(1);
                         new Tab(TabsContainer, document, "something");
                         break;
                     default:
-                        MessageBox.Show("Ошибка при создании вкладки");
+                        MessageBox.Show("Ошибка при создании вкладки: " + Convert.ToString(document.GetName()));
                         break;
                 }
             };
