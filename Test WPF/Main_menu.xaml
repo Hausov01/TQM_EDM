@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Test_WPF"
         mc:Ignorable="d"
-        Title="Window1" Height="800" Width="1200">
+        WindowStartupLocation="CenterScreen"
+        Title="Главное меню" Height="800" Width="1200">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -22,7 +23,7 @@
             <TextBlock  Text="Отчёт о проверке партии" FontSize="14" MouseLeftButtonDown="NewTab" Padding="10,3,0,3"/>
             <TextBlock  Text="Акт о браке продукции" FontSize="14" MouseLeftButtonDown="NewTab" Padding="10,3,0,3"/>
             <TextBlock  Text="Итоговый отчёт" FontSize="14" MouseLeftButtonDown="NewTab" Padding="10,3,0,3"/>
-            <TextBlock  Text="НСИ" FontSize="14" Padding="10,8,0,3" FontWeight="Bold"/>
+            <TextBlock  Text="Реестры" FontSize="14" Padding="10,8,0,3" FontWeight="Bold"/>
             <TextBlock  Text="Поставщики" FontSize="14" Padding="10,3,0,3"/>
             <TextBlock  Text="Партии" FontSize="14" Padding="10,3,0,3"/>
             <TextBlock  Text="Накадные" FontSize="14" Padding="10,3,0,3"/>
